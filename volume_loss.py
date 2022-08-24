@@ -15,6 +15,7 @@ import pylab
 import matplotlib.image as mpimg
 import sys
 import glob
+import argparse
 from scipy import ndimage
 from skimage import morphology
 
@@ -144,7 +145,7 @@ def contour_detection(slice1, slice2):
     high_threshold = 0.2 * np.max(new_df)
     result2 = double_threshold(new_df, low_threshold, high_threshold)
     
-    print("finish detecting the contour\n")
+    write_log_file("finish detecting the contour\n")
     return result, result2
 
 '''
@@ -152,7 +153,7 @@ dfs algorithm to calculate the small loss area
 '''
 
 def dfs(grid, i, j):
-    row = len(grid);
+    row = len(grid)
     col = len(grid[0])
     if(i<0 or j<0 or i>=row or j>=col or grid[i][j]==1):
         return
@@ -160,11 +161,11 @@ def dfs(grid, i, j):
     global size
     size+=1
     #print(size)
-    dfs(grid,i+1,j);
-    dfs(grid,i-1,j);
-    dfs(grid,i,j+1);
-    dfs(grid,i,j-1);
-    return;
+    dfs(grid,i+1,j)
+    dfs(grid,i-1,j)
+    dfs(grid,i,j+1)
+    dfs(grid,i,j-1)
+    return
 
 '''
 single slice calculation
@@ -177,7 +178,7 @@ def slice_loss(metaslice1,metaslice2):
     grid = np.array(slice2)
     grid = grid[200:300]
     grid = grid[:,200:300]
-    row = len(grid);
+    row = len(grid)
     col = len(grid[0])
     for i in range(row):
         for j in range(col):
@@ -193,7 +194,7 @@ def slice_loss(metaslice1,metaslice2):
     grid = np.array(slice1)
     grid = grid[200:300]
     grid = grid[:,200:300]
-    row = len(grid);
+    row = len(grid)
     col = len(grid[0])
     for i in range(row):
         for j in range(col):
@@ -204,10 +205,10 @@ def slice_loss(metaslice1,metaslice2):
                 size = 0
                 dfs(grid,i,j)
                 contour_list_before.append(size)
-    print("area in post test")
-    print(contour_list_after)
-    print("area in pre test")
-    print(contour_list_before)
+    write_log_file("area in post test")
+    write_log_file(str(contour_list_after))
+    write_log_file("area in pre test")
+    write_log_file(str(contour_list_before))
     
     threshold = min(contour_list_before[0],contour_list_after[0])
     sum_before = 0
@@ -236,7 +237,7 @@ def read_dcm(directory):
         f = os.path.join(directory, filename)
         files.append(pydicom.dcmread(f))
 
-    print("file count: {}".format(len(files)))
+    write_log_file("file count: {}".format(len(files)))
 
     slices = []
     skipcount = 0
@@ -246,7 +247,7 @@ def read_dcm(directory):
         else:
             skipcount = skipcount + 1
 
-    print("skipped, no SliceLocation: {}".format(skipcount))
+    write_log_file("skipped, no SliceLocation: {}".format(skipcount))
 
     # ensure they are in the correct order
     slices = sorted(slices, key=lambda s: s.SliceLocation)
@@ -274,7 +275,7 @@ def create_array(slices1, slices2):
     for i, s in enumerate(slices2):
         img2d = s.pixel_array
         img3d_2[:, :, i] = img2d
-    print("finish creating 3d array\n")
+    write_log_file("finish creating 3d array\n")
     return img3d, img3d_2,ps, ss, img_shape
 
 '''
@@ -286,23 +287,34 @@ def cal_vol_loss(img3d, img3d_2, ps, thick, img_shape):
     for i in range(img_shape[2]//4,img_shape[2]):
         metaslice1 = img3d[:, :, i]
         metaslice2 = img3d_2[:, :, i]
-        print('\n')
-        print("calculate loss of slice",i)
+        write_log_file('\n')
+        write_log_file("calculate loss of slice"+str(i))
         sliceLoss = slice_loss(metaslice1,metaslice2)
-        print("\nloss = ",sliceLoss)
+        write_log_file("\nloss = "+str(sliceLoss))
         loss_actual_size = sliceLoss * ps[0] * ps[1] * 0.001 * 0.001
         vol_loss += loss_actual_size * thick * 0.001
-        print("current integration volume loss is",vol_loss,"m^3")
+        write_log_file("current integration volume loss is"+str(vol_loss)+"m^3")
     return vol_loss
-        
+
+def write_log_file(line):
+    with open("log",'a') as f:
+        f.write(line+"\n")
         
 if __name__ == '__main__':
+    """
+    clear log content when running again
+    """
+    with open("log",'w') as f:
+        f.write("")
+    # directory1 = input()
+    # directory2 = input()
     directory1 = "./Pre Test CT Scan/Series-431_11226 Core 1/"
     directory2 = "./Post Test CT Scans/Series-470_22-J2_11226_ATWC 2"
     slices1 = read_dcm(directory1)
-    print("finished loading pre test")
+    write_log_file("finished loading pre test")
     slices2 = read_dcm(directory2)
-    print("finished loading post test")
+    write_log_file("finished loading post test")
     img3d, img3d_2, ps, thick, img_shape= create_array(slices1, slices2)
-    cal_vol_loss(img3d, img3d_2, ps, thick, img_shape)
+    loss_result = cal_vol_loss(img3d, img3d_2, ps, thick, img_shape)
+    write_log_file("\n\nthe final volume loss is"+loss_result+"m^3")
 

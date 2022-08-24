@@ -1,0 +1,167 @@
+file count: 401
+skipped, no SliceLocation: 0
+finished loading pre test
+file count: 401
+skipped, no SliceLocation: 0
+finished loading post test
+finish creating 3d array
+
+
+
+calculate loss of slice100
+finish detecting the contour
+
+area in post test
+[8926, 40, 34, 1, 1, 1, 1, 1, 1, 5, 18]
+area in pre test
+[9845, 1]
+
+loss = 102
+current integration volume loss is4.348464e-09m^3
+
+
+calculate loss of slice101
+finish detecting the contour
+
+area in post test
+[9047, 3, 27, 1, 1, 1, 1, 2, 1, 1, 1]
+area in pre test
+[9853]
+
+loss = 39
+current integration volume loss is6.011112e-09m^3
+
+
+calculate loss of slice102
+finish detecting the contour
+
+area in post test
+[9056, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+area in pre test
+[9847]
+
+loss = 10
+current integration volume loss is6.437432e-09m^3
+
+
+calculate loss of slice103
+finish detecting the contour
+
+area in post test
+[9175, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2]
+area in pre test
+[9829, 1, 1, 1, 1, 1, 1]
+
+loss = 6
+current integration volume loss is6.693224e-09m^3
+
+
+calculate loss of slice104
+finish detecting the contour
+
+area in post test
+[9191, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+area in pre test
+[9810, 1, 2, 1, 1]
+
+loss = 5
+current integration volume loss is6.906384e-09m^3
+
+
+calculate loss of slice105
+finish detecting the contour
+
+area in post test
+[9126, 2, 1, 1, 1, 1, 1, 1, 6, 1, 1]
+area in pre test
+[9797, 1, 1, 1, 1]
+
+loss = 12
+current integration volume loss is7.417968e-09m^3
+
+
+calculate loss of slice106
+finish detecting the contour
+
+area in post test
+[9212, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+area in pre test
+[9788, 1, 1, 1, 1, 1]
+
+loss = 5
+current integration volume loss is7.631128e-09m^3
+
+
+calculate loss of slice107
+finish detecting the contour
+
+area in post test
+[9059, 9, 1, 1, 1, 1, 3, 1, 1, 1, 1]
+area in pre test
+[9826, 1, 1, 1, 1]
+
+loss = 16
+current integration volume loss is8.31324e-09m^3
+
+
+calculate loss of slice108
+finish detecting the contour
+
+area in post test
+[9102, 10, 1, 1, 1, 1, 1, 1, 2, 1, 1]
+area in pre test
+[9782, 1, 2, 1, 1, 1, 1, 1]
+
+loss = 12
+current integration volume loss is8.824824e-09m^3
+
+
+calculate loss of slice109
+finish detecting the contour
+
+area in post test
+[9091, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2]
+area in pre test
+[9810, 1, 1, 1, 1]
+
+loss = 7
+current integration volume loss is9.123248e-09m^3
+
+
+calculate loss of slice110
+finish detecting the contour
+
+area in post test
+[9027, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+area in pre test
+[9780, 1, 1, 1, 1, 1]
+
+loss = 7
+current integration volume loss is9.421672e-09m^3
+
+
+calculate loss of slice111
+finish detecting the contour
+
+area in post test
+[8721, 1, 197, 1, 1, 1, 1, 2, 1, 2, 1]
+area in pre test
+[9769, 1, 1, 1, 1]
+
+loss = 204
+current integration volume loss is1.81186e-08m^3
+
+
+calculate loss of slice112
+finish detecting the contour
+
+area in post test
+[9243, 7, 1, 1, 1, 2, 1, 1, 1, 1, 1]
+area in pre test
+[9778, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+loss = 8
+current integration volume loss is1.8459656e-08m^3
+
+
+calculate loss of slice113
